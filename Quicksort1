@@ -1,0 +1,35 @@
+#QUICKSORT : The time complexity of this code when elements are not sorted is O(nlogn), where as when elements are sorted it is O(n^2)
+class Solution:
+    def sortArray(self, nums: List[int]) -> List[int]:
+        def quicksort(nums,low,high):
+            if low<high:
+                pivot_index= partition(low,high,nums)
+                quicksort(nums,low,pivot_index-1)
+                quicksort(nums,pivot_index+1,high)
+
+        def partition(low,high,nums):
+            pivot=nums[low]
+            start=low+1
+            end=high
+            while start<=end:
+                while start<=end and  nums[start]<=pivot:
+                    start+=1
+                while start<=end and nums[end]>pivot:
+                    end-=1
+
+                if start<end:
+                    swap(start,end,nums)
+            
+            swap(low,end,nums)
+            return end
+
+        def swap(a,b,nums):
+            temp = nums[a]
+            nums[a]=nums[b]
+            nums[b]=temp
+            return nums
+
+        quicksort(nums,0, len(nums)-1)
+        return nums
+            
+                
