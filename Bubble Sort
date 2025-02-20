@@ -1,0 +1,19 @@
+# BUBBLE SORT. Time Complexity: Best case : O(n) [when array is already sorted], worse case: O(n^2). Space Complexity: O(1)
+def bubble_sort(arr):
+    n = len(arr)
+    for i in range(n):
+        swapped = False  # Optimization: To break early if no swaps occur
+        for j in range(0, n - i - 1):
+            if arr[j] > arr[j + 1]:  # Swap if the element is greater than the next
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+                swapped = True  # Mark that a swap occurred
+
+        if not swapped:
+            break  # Stop early if no swaps happened in the last pass
+
+# Example usage
+if __name__ == "__main__":
+    arr = [64, 34, 25, 12, 22, 11, 90]
+    print("Original array:", arr)
+    bubble_sort(arr)
+    print("Sorted array:", arr)
