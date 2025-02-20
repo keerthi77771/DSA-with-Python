@@ -1,0 +1,17 @@
+# SELECTION SORT Time complexity = O(n^2) for all, space complexity: O(1)
+
+def selection_sort(arr):
+    n = len(arr)
+    for i in range(n - 1):  # Corrected range
+        cur_min_idx = i
+        for j in range(i + 1, n):
+            if arr[j] < arr[cur_min_idx]:  # Added missing colon
+                cur_min_idx = j  # Update minimum index
+
+        # Swap the found minimum element with the first element
+        arr[i], arr[cur_min_idx] = arr[cur_min_idx], arr[i]
+
+# Example usage
+arr = [64, 25, 12, 22, 11]
+selection_sort(arr)
+print("Sorted array:", arr)
