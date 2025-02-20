@@ -1,0 +1,43 @@
+#QUICKSORT : The time complexity of this code when elements are not sorted is O(nlogn). Its the same even when elements are sorted.
+
+from typing import List
+import random
+
+class Solution:
+    def sortArray(self, nums: List[int]) -> List[int]:
+        def quicksort(nums, low, high):
+            if low < high:
+                pivot_index = partition(nums, low, high)
+                quicksort(nums, low, pivot_index - 1)
+                quicksort(nums, pivot_index + 1, high)
+
+        def partition(nums, low, high):
+            # **Random pivot selection to prevent worst-case O(n²)**
+            random_pivot_index = random.randint(low, high)
+            swap(nums, low, random_pivot_index)  # Swap pivot with the first element
+            
+            pivot = nums[low]
+            start = low + 1
+            end = high
+
+            while start <= end:
+                while start <= end and nums[start] <= pivot:
+                    start += 1
+                while start <= end and nums[end] > pivot:
+                    end -= 1
+                
+                if start < end:
+                    swap(nums, start, end)
+
+            swap(nums, low, end)  # Place pivot at correct position
+            return end
+
+        def swap(nums, a, b):
+            nums[a], nums[b] = nums[b], nums[a]
+
+        quicksort(nums, 0, len(nums) - 1)
+        return nums
+
+# Example Usage:
+solution = Solution()
+print(solution.sortArray([5, 2, 3, 1]))  # Expected Output: [1, 2, 3, 5]
